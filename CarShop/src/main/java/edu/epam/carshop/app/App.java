@@ -1,4 +1,4 @@
-package edu.epam.carshop;
+package edu.epam.carshop.app;
 
 import edu.epam.carshop.entity.Car;
 import edu.epam.carshop.exception.DAOException;
