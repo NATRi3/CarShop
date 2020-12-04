@@ -3,8 +3,8 @@ package edu.epam.carshop.entity;
 public enum Brand {
     AUDI("Audi"),
     BMW("BMW"),
-    Toyota("Toyota"),
-    Skoda("Skoda"),
+    TOUOTA("Toyota"),
+    SKODA("Skoda"),
     WV("Volkswagen");
 
     private String brandName;

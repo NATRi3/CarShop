@@ -1,35 +1,36 @@
-/*package edu.epam.carshop.entity;
+package edu.epam.carshop.entity;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarShop {
+public class CarShop implements Shop<Car>{
+    public static final CarShop INSTANCE = new CarShop();
     private static final Logger logger = LogManager.getLogger(CarShop.class);
-    private ArrayList<Car> cars = new ArrayList<Car>();
+    private List<Car> cars = new ArrayList<Car>();
 
-    public CarShop() {
+    private CarShop() { }
 
+    public List<Car> getCars(){
+        return new ArrayList<>(cars);
     }
 
-    public CarShop(List<Car> cars){
-            this.cars= (ArrayList<Car>) cars;
+
+    @Override
+    public void add(Car car) {
+        cars.add(car);
     }
 
-    public void addCar(Car car) {
-            cars.add(car);
-    }
-
-    public void removeCar(int id){
+    @Override
+    public boolean remove(int id){
+        boolean result = false;
         if (!cars.isEmpty()) {
             for(Car car: cars){
                 if(car.getId()==id){
                     cars.remove(car);
                     logger.info("Car removed.");
-                    return;
+                    result = true;
                 }
             }
             logger.info("Car not found.");
@@ -37,26 +38,31 @@ public class CarShop {
         else{
             logger.info("Garage is empty.");
         }
+        return result;
     }
 
-    public Car getCar(int id) {
+    @Override
+    public Car get(int id) {
+        Car result = null;
         if (!cars.isEmpty()) {
             for(Car car: cars){
                 if(car.getId()==id){
-                    return car;
+                    result = car;
                 }
             }
-            logger.info("Car not found.");
+            if(result == null) {
+                logger.info("Car not found.");
+            }
         }
         else{
             logger.info("Garage is empty.");
         }
-        logger.info("Car wasn't found");
-        return null;
+        return result;
     }
 
-    public void setCars(ArrayList<Car> cars) {
+    @Override
+    public void set(List<Car> cars) {
         this.cars = cars;
     }
-}*/
+}
 
