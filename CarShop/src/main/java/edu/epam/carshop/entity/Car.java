@@ -9,19 +9,19 @@ public class Car extends Entity {
     private final int id;
     private String model;
     private Brand brand;
-    private final Calendar year = new GregorianCalendar();
+    private int year;
     private Color color;
     private BigDecimal price;
     private String number;
 
     public Car(int id ,String model, Brand brand, int year, Color color, BigDecimal price, String number) {
         this.id = id;
-        this.setModel(model);
-        this.setBrand(brand);
-        this.setYear(year);
-        this.setColor(color);
-        this.setPrice(price);
-        this.setNumber(number);
+        this.model = model;
+        this.brand = brand;
+        this.year = year;
+        this.color = color;
+        this.price = price;
+        this.number = number;
     }
 
     public String getModel() {
@@ -41,11 +41,11 @@ public class Car extends Entity {
     }
 
     public int getYear() {
-        return year.get(Calendar.YEAR);
+        return year;
     }
 
     public void setYear(int year) {
-        this.year.set(Calendar.YEAR,year);
+        this.year=year;
     }
 
     public Color getColor() {
@@ -83,9 +83,9 @@ public class Car extends Entity {
         Car car = (Car) o;
         return this.id==car.getId() &&
                 this.model.equals(car.model) &&
-                this.brand.ordinal()==car.getBrand().ordinal() &&
-                this.year.equals(car.year) &&
-                this.color.ordinal()==car.getColor().ordinal() &&
+                this.brand.equals(car.getBrand()) &&
+                this.year==car.year &&
+                this.color.equals(car.getColor()) &&
                 this.price.equals(car.price) &&
                 this.number.equals(car.number);
     }
@@ -94,7 +94,7 @@ public class Car extends Entity {
     public int hashCode() {
         int hash = 79;
         return hash*id+brand.ordinal()*hash+color.ordinal()+model.hashCode()*hash
-                +price.hashCode()/hash+number.hashCode()*hash+year.hashCode()*hash  ;
+                +price.hashCode()/hash+number.hashCode()*hash+year*hash  ;
     }
 
     @Override

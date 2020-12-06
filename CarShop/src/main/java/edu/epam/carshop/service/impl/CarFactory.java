@@ -20,30 +20,17 @@ public class CarFactory {
 
     private CarFactory(){      }
     public Car create(String model, Brand brand, int year, Color color, BigDecimal price, String number) throws ServiceException {
-        if(price.compareTo(BigDecimal.valueOf(0))<=0||year<=1900||year>=2021){
-            logger.error("Wrong argument");
-            throw new ServiceException("Wrong argument");
-        }
-        return new Car(new IdCarCreator().idCreator(), model, brand, year, color, price, number);
+        return create(new IdCarCreator().idCreator(),model,brand,year,color,price,number);
     }
 
     public Car create(int id, String model, Brand brand, int year, Color color, BigDecimal price, String number) throws ServiceException {
-        if(id<=0||price.compareTo(BigDecimal.valueOf(0))<=0||year<=1900||year>=2021){
-            logger.error("Wrong argument");
-            throw new ServiceException("Wrong argument");
-        }
         Car createdCar = new Car(id, model, brand, year, color, price, number);
-        carDao.create(createdCar);
-        try {
-            return carDao.findEntityById(id);
-        } catch (DAOException e) {
-            throw new ServiceException();
-        }
+        return create(createdCar);
     }
 
     public Car create(Car car) throws ServiceException {
         if(car.getId()<=0||car.getPrice().compareTo(BigDecimal.valueOf(0))<=0
-                ||1990<=car.getYear()||car.getYear()>=2020){
+                ||1990>=car.getYear()||car.getYear()>2020){
             logger.error("Wrong argument");
             throw new ServiceException("Wrong argument");
         }
@@ -56,7 +43,7 @@ public class CarFactory {
 
     public Car update (Car car) throws ServiceException {
         if(car.getId()<=0||car.getPrice().compareTo(BigDecimal.valueOf(0))<=0
-                ||1990<=car.getYear()||car.getYear()>=2020){
+                ||1990>=car.getYear()||car.getYear()>2020){
             logger.error("Wrong argument");
             throw new ServiceException("Wrong argument");
         }

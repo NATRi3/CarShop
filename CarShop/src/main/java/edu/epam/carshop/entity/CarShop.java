@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarShop implements Shop<Car>{
-    public static final CarShop INSTANCE = new CarShop();
     private static final Logger logger = LogManager.getLogger(CarShop.class);
+    public static final CarShop INSTANCE = new CarShop();
     private List<Car> cars = new ArrayList<Car>();
 
     private CarShop() { }
@@ -26,17 +26,17 @@ public class CarShop implements Shop<Car>{
     public boolean remove(int id){
         boolean result = false;
         if (!cars.isEmpty()) {
-            for(Car car: cars){
-                if(car.getId()==id){
-                    cars.remove(car);
-                    logger.info("Car removed.");
+            for(int i = 0; i<cars.size();i++){
+                if(cars.get(i).getId()==id){
+                    cars.remove(cars.get(i));
+                   // logger.info("Car removed.");
                     result = true;
                 }
             }
-            logger.info("Car not found.");
+           // logger.info("Car not found.");
         }
         else{
-            logger.info("Garage is empty.");
+       //     logger.info("Garage is empty.");
         }
         return result;
     }

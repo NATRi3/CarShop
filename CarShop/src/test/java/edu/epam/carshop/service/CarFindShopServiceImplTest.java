@@ -39,50 +39,37 @@ public class CarFindShopServiceImplTest {
 
     @Test
     public void testFindAllByBrand() throws ServiceException {
-        boolean result = true;
         expected.add(new Car(476544, "Rapid", Brand.SKODA, 2003, Color.BLUE, BigDecimal.valueOf(23000), "9645"));
         expected.add(new Car(65434, "Rapid", Brand.SKODA, 2006, Color.YELLOW, BigDecimal.valueOf(2000), "7521"));
         ArrayList<Car> actual = new ArrayList<Car>(carFindShopService.findAllBy(Brand.SKODA));
-        if(actual.size()!=expected.size()){
-            result = false;
-        }else {
-             for(int i = 0; i<actual.size(); i++){
-                 if(!actual.get(i).equals(expected.get(i))){
-                     result=false;
-                 }
-             }
-        }
-        Assert.assertTrue(result);
+        Assert.assertEquals(actual,expected);
     }
 
     @Test
     public void testFindAllByColor() throws ServiceException {
-        boolean result = true;
         expected.add(new Car(65434, "Rapid", Brand.SKODA, 2006, Color.YELLOW, BigDecimal.valueOf(2000), "7521"));
         ArrayList<Car> actual = new ArrayList<Car>(carFindShopService.findAllBy(Color.YELLOW));
-        if(actual.size()!=expected.size()){
-            result = false;
-        }else {
-            for(int i = 0; i<actual.size(); i++){
-                if(!actual.get(i).equals(expected.get(i))){
-                    System.out.println(actual.get(i));
-                    System.out.println(expected.get(i));
-                    System.out.println(actual.get(i).equals(expected.get(i)));
-                }
-            }
-        }
-        Assert.assertTrue(result);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void testFindCarBy() {
+    public void testFindCarById() throws ServiceException {
+        Car expected = new Car(65434, "Rapid", Brand.SKODA, 2006, Color.YELLOW, BigDecimal.valueOf(2000), "7521");
+        Car actual = (carFindShopService.findCarBy(65434));
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void testTestFindCarBy() {
+    public void testFindCarByCar() throws ServiceException {
+        Car expected = new Car(65434, "Rapid", Brand.SKODA, 2006, Color.YELLOW, BigDecimal.valueOf(2000), "7521");
+        Car actual = (carFindShopService.findCarBy(expected));
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void testTestFindCarBy1() {
+    public void testFindAllByNumber() throws ServiceException {
+        expected.add(new Car(65434, "Rapid", Brand.SKODA, 2006, Color.YELLOW, BigDecimal.valueOf(2000), "7521"));
+        ArrayList<Car> actual = new ArrayList<Car>(carFindShopService.findAllBy("7521"));
+        Assert.assertEquals(actual, expected);
     }
 }

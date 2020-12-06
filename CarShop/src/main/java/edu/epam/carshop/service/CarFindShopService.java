@@ -19,5 +19,5 @@ public interface CarFindShopService {
     public List<Car> findAllBy(Color color) throws ServiceException;
     public Car findCarBy(int id) throws ServiceException ;
     public Car findCarBy(Car car) throws ServiceException ;
-    public List<Car> findCarBy(String number) throws ServiceException;
+    public List<Car> findAllBy(String number) throws ServiceException;
 }

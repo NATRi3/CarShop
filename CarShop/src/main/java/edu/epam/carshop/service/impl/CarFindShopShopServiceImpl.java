@@ -77,7 +77,7 @@ public class CarFindShopShopServiceImpl implements CarFindShopService {
         CarDaoImpl carDao = new CarDaoImpl();
         Car result = null;
         try {
-            if (!carDao.findEntityById(car.getId()).equals(car)){
+            if (carDao.findEntityById(car.getId()).equals(car)){
                 result=carDao.findEntityById(car.getId());
             } else {
                 logger.info("Car not found.");
@@ -89,7 +89,7 @@ public class CarFindShopShopServiceImpl implements CarFindShopService {
     }
 
     @Override
-    public List<Car> findCarBy(String number) throws ServiceException {
+    public List<Car> findAllBy(String number) throws ServiceException {
         CarDaoImpl carDao = new CarDaoImpl();
         List<Car> result = null;
         try {
