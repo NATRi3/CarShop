@@ -38,14 +38,11 @@ public class CarFactoryTest {
             result = false;
         }
         Car carUpdated = new Car(756443, "Polo", Brand.WV, 2008, Color.RED, BigDecimal.valueOf(13000), "9952");
-        CarFactory.INSTANCE.update(car);
-        System.out.println(carUpdated);
-        System.out.println(carFindShopService.findAll().get(1));
-        if(!(carFindShopService.findAll().get(0).equals(carUpdated))){
+        if(!(CarFactory.INSTANCE.update(carUpdated).equals(carUpdated))){
             result = false;
         }
         CarFactory.INSTANCE.delete(carUpdated);
-        if(carFindShopService.findAll()!= null) {
+        if(carFindShopService.findAll().equals(null)) {
             result = false;
         }
         Assert.assertTrue(result);

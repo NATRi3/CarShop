@@ -25,9 +25,9 @@ public class CarDaoImpl implements CarDao {
     @Override
     public Car findEntityById(Integer id) throws DAOException {
         List <Car> carList = CarShop.INSTANCE.getCars();
-        for(Car car: carList){
-            if (car.getId()==id){
-                return car;
+        for(int i = 0; i<carList.size(); i++){
+            if (carList.get(i).getId()==id){
+                return CarShop.INSTANCE.get(i);
             }
         }
         throw new DAOException("Car not found.");
@@ -48,18 +48,32 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public boolean delete(Integer id) {
-        return CarShop.INSTANCE.remove(id);
+        boolean result = false;
+        List<Car> list = CarShop.INSTANCE.getCars();
+        for (int i = 0; i<list.size();i++) {
+            if (list.get(i).getId() == id) {
+                CarShop.INSTANCE.remove(i);
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override
     public Car create(Car car){
         CarShop.INSTANCE.add(car);
-        return CarShop.INSTANCE.get(car.getId());
+        return CarShop.INSTANCE.get(CarShop.INSTANCE.getCars().size()-1);
     }
 
     @Override
     public Car update(Car car) {
-        Car carUpdate = CarShop.INSTANCE.get(car.getId());
+        List<Car> carList = CarShop.INSTANCE.getCars();
+        Car carUpdate = null;
+        for(int i = 0; i<carList.size();i++ ){
+            if(car.getId()==carList.get(i).getId()){
+                carUpdate = carList.get(i);
+            }
+        }
         carUpdate.setColor(car.getColor());
         carUpdate.setBrand(car.getBrand());
         carUpdate.setNumber(car.getNumber());

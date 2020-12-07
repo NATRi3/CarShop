@@ -70,8 +70,6 @@ public class CarSortServiceTest {
         carSortService.carShopSortByBrand();
         expected.add(new Car(245124, "Corolla", Brand.TOUOTA, 2004, Color.RED, BigDecimal.valueOf(20000), "6533"));
         expected.add(new Car(756443, "Polo", Brand.WV, 2008, Color.WHITE, BigDecimal.valueOf(13000), "9952"));
-        System.out.println(expected);
-        System.out.println(carFindShopService.findAll());
         Assert.assertEquals(carFindShopService.findAll(),expected);
     }
 }

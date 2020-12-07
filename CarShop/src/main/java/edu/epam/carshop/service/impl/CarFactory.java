@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CarFactory {
     private static final Logger logger = LogManager.getLogger(CarFindShopShopServiceImpl.class);
@@ -37,20 +38,16 @@ public class CarFactory {
         return carDao.create(car);
     }
 
-    public boolean delete(Car car){
-        return CarShop.INSTANCE.remove(car.getId());
+    public boolean delete(Car car) throws ServiceException {
+        return carDao.delete(car.getId());
     }
 
-    public Car update (Car car) throws ServiceException {
-        if(car.getId()<=0||car.getPrice().compareTo(BigDecimal.valueOf(0))<=0
-                ||1990>=car.getYear()||car.getYear()>2020){
+    public Car update (Car carUpdate) throws ServiceException {
+        if(carUpdate.getId()<=0||carUpdate.getPrice().compareTo(BigDecimal.valueOf(0))<=0
+                ||1990>=carUpdate.getYear()||carUpdate.getYear()>2020){
             logger.error("Wrong argument");
             throw new ServiceException("Wrong argument");
         }
-        if(CarShop.INSTANCE.remove(car.getId())){
-            CarShop.INSTANCE.add(car);
-            return car;
-        }
-        return null;
+        return carDao.update(carUpdate);
     }
 }

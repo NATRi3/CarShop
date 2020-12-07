@@ -23,41 +23,13 @@ public class CarShop implements Shop<Car>{
     }
 
     @Override
-    public boolean remove(int id){
-        boolean result = false;
-        if (!cars.isEmpty()) {
-            for(int i = 0; i<cars.size();i++){
-                if(cars.get(i).getId()==id){
-                    cars.remove(cars.get(i));
-                   // logger.info("Car removed.");
-                    result = true;
-                }
-            }
-           // logger.info("Car not found.");
-        }
-        else{
-       //     logger.info("Garage is empty.");
-        }
-        return result;
+    public void remove(int idList){
+        cars.remove(cars.get(idList));
     }
 
     @Override
-    public Car get(int id) {
-        Car result = null;
-        if (!cars.isEmpty()) {
-            for(Car car: cars){
-                if(car.getId()==id){
-                    result = car;
-                }
-            }
-            if(result == null) {
-                logger.info("Car not found.");
-            }
-        }
-        else{
-            logger.info("Garage is empty.");
-        }
-        return result;
+    public Car get(int idList) {
+        return cars.get(idList);
     }
 
     @Override
