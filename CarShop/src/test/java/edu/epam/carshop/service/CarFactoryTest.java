@@ -42,7 +42,7 @@ public class CarFactoryTest {
             result = false;
         }
         CarFactory.INSTANCE.delete(carUpdated);
-        if(carFindShopService.findAll().equals(null)) {
+        if(!(carFindShopService.findAll().equals(null))) {
             result = false;
         }
         Assert.assertTrue(result);
